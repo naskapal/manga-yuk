@@ -6,6 +6,7 @@
     <meta content="width=1300, initial-scale=1 user-scalable=yes" name="viewport">
     <title>Manga Yuk!</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue"></script>
     <link rel="stylesheet" href="/assets/css/style.css">
   </head>
@@ -17,16 +18,16 @@
         <a class="item">Komik</a>
         <a class="item">Genre</a>
         <div v-if="login">
-          <a class="item">Log in</a>
-          <a class="item">Sign Up</a>
-        </div>
-        <div v-else>
-          <a class="item">
+          <a class="item" @click="modalAdd">
             <i class="add circle icon"></i>
             Tambah Komik
           </a>
           <a class="item">My Account</a>
           <a class="item">Logout</a>
+        </div>
+        <div v-else>
+          <a class="item">Log in</a>
+          <a class="item">Sign Up</a>
         </div>
       </div>
       <!--Page Contents-->
@@ -41,17 +42,17 @@
               <a class="item">Komik</a>
               <a class="item">Genre</a>
               <div class="right item">
+                <a class="ui inverted button" @click="modalAdd">
+                  <i class="add circle icon"></i>
+                  Tambah Komik
+                </a>
                 <div v-if="login">
-                  <a class="ui inverted button">Log in</a>
-                  <a class="ui inverted button">Sign Up</a>
-                </div>
-                <div v-else>
-                  <a class="ui inverted button">
-                    <i class="add circle icon"></i>
-                    Tambah Komik
-                  </a>
                   <a class="ui inverted button">My Account</a>
                   <a class="ui inverted red button">Logout</a>
+                </div>
+                <div v-else>
+                  <a class="ui inverted button">Log in</a>
+                  <a class="ui inverted button">Sign Up</a>
                 </div>
               </div>
             </div>
@@ -72,9 +73,13 @@
             </div>
             <div class="ui inverted divider"></div>
             <div class="ui links five cards doubling">
-              <card-comic v-for="l in loop"/>
+              <card-comic v-for="(l,i) in loop" :key="i" v-if="i < 10"/>
             </div>
-            <div class="ui inverted divider"></div>
+            <div class="ui segment">
+              <div class="ui primary button fluid large center floated">
+                Lihat lebih banyak
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -93,12 +98,12 @@
               <h4 class="ui inverted header">Account</h4>
               <div class="ui inverted link list">
                 <div v-if="login">
-                  <a href="#" class="item">Log in</a><br>
-                  <a href="#" class="item">Sign Up</a>
-                </div>
-                <div v-else>
                   <a href="#" class="item">My Account</a><br>
                   <a href="#" class="item">Logout</a>
+                </div>
+                <div v-else>
+                  <a href="#" class="item">Log in</a><br>
+                  <a href="#" class="item">Sign Up</a>
                 </div>
               </div>
             </div>
@@ -114,6 +119,59 @@
             <a class="item" href="#">Contact Us</a>
             <a class="item" href="#">Terms and Conditions</a>
             <a class="item" href="#">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="ui tiny modal modal-add">
+        <i class="close icon"></i>
+        <div class="header">
+          Profile Picture
+        </div>
+        <div class="content">
+          <form class="ui form fluid">
+            <div class="field">
+              <label>Judul Komik</label>
+              <input name="title" placeholder="Judul Komik" type="text">
+            </div>
+            <div class="field">
+              <label>Deskripsi</label>
+              <textarea name="description" placeholder="Deskripsi..." rows="2"></textarea>
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <label>Poster Komik</label>
+                <div class="ui action input">
+                  <input type="text" placeholder="Pilih Poster Komik" readonly>
+                  <input type="file" name="poster">
+                  <div class="ui icon button">
+                    <i class="attach icon"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label>Gambar Komik</label>
+                <div class="ui action input">
+                  <input type="text" placeholder="Pilih Gambar Komik" readonly>
+                  <input type="file" name="comic-pictures" multiple>
+                  <div class="ui icon button">
+                    <i class="attach icon"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+            </div>
+          </form>
+        </div>
+        <div class="actions">
+          <div class="ui black deny button">
+            Batal
+          </div>
+          <div class="ui positive right labeled icon button">
+            Simpan
+            <i class="checkmark icon"></i>
           </div>
         </div>
       </div>

@@ -84,6 +84,10 @@
   }
 }
 
-.bgimage {
-  background: url('../img/slide/slide1.jpg');
+.ui.action.input input[type="file"] {
+  display: none;
+}
+
+.bgimg {
+  background-image: url("https://www.komikgue.com/uploads/manga/kingdom/chapters/539/03.jpg") #333 !important;
 }
