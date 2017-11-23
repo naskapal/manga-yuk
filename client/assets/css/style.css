@@ -64,6 +64,7 @@
     display: none !important;
   }
   .secondary.pointing.menu .item,
+  .secondary.pointing.menu .item.right,
   .secondary.pointing.menu .menu {
     display: none;
   }
