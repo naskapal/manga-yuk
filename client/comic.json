@@ -1,0 +1,41 @@
+{
+"comic" :  [
+    {
+      "id":1,
+      "title":"Judul 1",
+      "description":"akjsdhuiahskdjyasiuhdkjahs askdkajsd askjhdamnsd asdkjasskjh askjhdsk asd asdkjahs",
+      "picture":["assets/img/poster/1.jpg","assets/img/poster/2.jpg","assets/img/poster/3.jpg","assets/img/poster/4.jpg"]
+    },
+    {
+      "id":2,
+      "title":"Judul 2",
+      "description":"akjsdhuiahskdjyasiuhdkjahs askdkajsd askjhdamnsd asdkjasskjh askjhdsk asd asdkjahs",
+      "picture":["assets/img/poster/sample.jpg"]
+    },
+    {
+      "id":3,
+      "title":"Judul 3",
+      "description":"akjsdhuiahskdjyasiuhdkjahs askdkajsd askjhdamnsd asdkjasskjh askjhdsk asd asdkjahs",
+      "picture":["assets/img/poster/sample.jpg"]
+    },
+    {
+      "id":4,
+      "title":"Judul 4",
+      "description":"akjsdhuiahskdjyasiuhdkjahs askdkajsd askjhdamnsd asdkjasskjh askjhdsk asd asdkjahs",
+      "picture":["assets/img/poster/sample.jpg"]
+    },
+    {
+      "id":5,
+      "title":"Judul 5",
+      "description":"akjsdhuiahskdjyasiuhdkjahs askdkajsd askjhdamnsd asdkjasskjh askjhdsk asd asdkjahs",
+      "picture":["assets/img/poster/sample.jpg"]
+    },
+    {
+      "id":6,
+      "title":"Judul 6",
+      "description":"akjsdhuiahskdjyasiuhdkjahs askdkajsd askjhdamnsd asdkjasskjh askjhdsk asd asdkjahs",
+      "picture":["assets/img/poster/sample.jpg"]
+    }
+  ]
+
+  }

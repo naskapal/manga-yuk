@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=1300, initial-scale=1 user-scalable=yes" name="viewport">
+    <title>Manga Yuk!</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body class="template pushable">
+    <div id="app">
+      <!--Sidebar Menu-->
+      <div class="ui vertical inverted sidebar menu left">
+        <a href="/" class="item">Home</a>
+        <a href="/komik.html" class="active item">Komik</a>
+        <a class="item">Genre</a>
+        <div v-if="isLogin">
+          <a class="item" @click="modalAdd">
+            <i class="add circle icon"></i>
+            Tambah Komik
+          </a>
+          <a class="item">My Account</a>
+          <a class="item">Logout</a>
+        </div>
+        <div v-else>
+          <a class="item">Log in</a>
+          <a class="item">Sign Up</a>
+        </div>
+      </div>
+
+      <!--Page Contents-->
+      <div class="ui large top fixed menu transition visible" style="display: flex !important;">
+        <div class="ui container">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+          <a class="title right item">
+            MANGA KUY!
+          </a>
+          <a href="/" class="item">Home</a>
+          <a href="/komik.html" class="active item">Komik</a>
+          <a class="item">Genre</a>
+          <div class="right menu" v-if="isLogin">
+            <div class="item">
+              <div class="item">
+                <a class="ui button" @click="modalAdd">
+                  <i class="add circle icon"></i>
+                  Tambah Komik</a>
+                </div>
+                <a class="ui button">My Account</a>
+              </div>
+              <div class="item">
+                <a class="ui red button">Logout</a>
+              </div>
+            </div>
+            <div class="right menu" v-else>
+              <div class="item">
+                <a class="ui button">Log in</a>
+              </div>
+              <div class="item">
+                <a class="ui primary button">Sign Up</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="ui vertical inverted sidebar menu left">
+        <a href="/" class="active item">Home</a>
+        <a href="/komik.html" class="item">Komik</a>
+        <a class="item">Genre</a>
+        <div v-if="isLogin">
+          <a class="item" @click="modalAdd">
+            <i class="add circle icon"></i>
+            Tambah Komik
+          </a>
+          <a class="item">My Account</a>
+          <a class="item">Logout</a>
+        </div>
+        <div v-else>
+          <a class="item">Log in</a>
+          <a class="item">Sign Up</a>
+        </div>
+      </div>
+      <!--Page Contents-->
+      <div class="pusher">
+        <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui segment">
+          <div class="ui container">
+            <div class="ui header">
+              {{reading}}
+            </div>
+            <div class="ui inverted divider"></div>
+            <div class="ui links four cards doubling">
+              <card-comic v-for="(comic,i) in comicList" :key="i" v-if="i < 8" :comic="comic"/>
+            </div>
+            <div class="ui segment">
+              <a href="/komik.html" class="ui primary button fluid large center floated">
+                Lihat lebih banyak
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+          <div class="ui stackable inverted divided centered grid">
+            <div class="three wide column center aligned">
+              <h4 class="ui inverted header">Manga Yuk</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Home</a>
+                <a href="#" class="item">Komik</a>
+                <a href="#" class="item">Genre</a>
+              </div>
+            </div>
+            <div class="three wide column center aligned">
+              <h4 class="ui inverted header">Account</h4>
+              <div class="ui inverted link list">
+                <div v-if="isLogin">
+                  <a href="#" class="item">My Account</a><br>
+                  <a href="#" class="item">Logout</a>
+                </div>
+                <div v-else>
+                  <a href="#" class="item">Log in</a><br>
+                  <a href="#" class="item">Sign Up</a>
+                </div>
+              </div>
+            </div>
+            <div class="seven wide column center aligned">
+              <h4 class="ui inverted header">Footer Header</h4>
+              <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+            </div>
+          </div>
+          <div class="ui inverted section divider"></div>
+          <h1>MANGA YUK!</h1>
+          <div class="ui horizontal inverted small divided link list">
+            <a class="item" href="#">Site Map</a>
+            <a class="item" href="#">Contact Us</a>
+            <a class="item" href="#">Terms and Conditions</a>
+            <a class="item" href="#">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="ui read basic longer modal">
+        <div class="ui segment">
+          <read-comic :comic="comicList"/>
+        </div>
+      </div>
+      <div class="ui tiny modal modal-add">
+        <i class="close icon"></i>
+        <div class="header">
+          Profile Picture
+        </div>
+        <div class="content">
+          <form class="ui form fluid">
+            <div class="field">
+              <label>Judul Komik</label>
+              <input name="title" placeholder="Judul Komik" type="text">
+            </div>
+            <div class="field">
+              <label>Deskripsi</label>
+              <textarea name="description" placeholder="Deskripsi..." rows="2"></textarea>
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <label>Poster Komik</label>
+                <div class="ui action input">
+                  <input type="text" placeholder="Pilih Poster Komik" readonly>
+                  <input type="file" name="poster">
+                  <div class="ui icon button">
+                    <i class="attach icon"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label>Gambar Komik</label>
+                <div class="ui action input">
+                  <input type="text" placeholder="Pilih Gambar Komik" readonly>
+                  <input type="file" name="comic-pictures" multiple>
+                  <div class="ui icon button">
+                    <i class="attach icon"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+            </div>
+          </form>
+        </div>
+        <div class="actions">
+          <div class="ui black deny button">
+            Batal
+          </div>
+          <div class="ui positive right labeled icon button">
+            Simpan
+            <i class="checkmark icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+  <script src="/assets/script/vue/vue-card-comic.js"></script>
+  <script src="/assets/script/vue/vue-read-comic.js"></script>
+  <script src="/assets/script/vue/vue-parent.js"></script>
+  <script src="/assets/script/script.js"></script>
+</html>
