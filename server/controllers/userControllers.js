@@ -16,9 +16,7 @@ const create = (req, res) => {
       username: req.body.username,
       password: encryptedPass,
       email: req.body.email,
-      gender: req.body.gender,
-      photo_profile: req.body.photo_profile,
-      isAdmin: req.body.isAdmin
+      gender: req.body.gender
     })
 
     user.save()
@@ -96,10 +94,14 @@ const remove = (req, res) => {
 
 // login user
 const login = (req, res) => {
+  console.log('bodydata', req.body);
   User.findOne({username: req.body.username})
   .then(user => {
+    console.log(user);
+    // console.log(req.body);
     passwordDecrypt(req.body.password, user.password)
     .then(success => {
+      console.log('masuk');
       if(success) {
         generateToken(user)
         .then(token => {
@@ -113,9 +115,9 @@ const login = (req, res) => {
         res.send('Login failed! Incorrect username or password')
       }
     })
-    .catch(err => res.status(500).send(err))
+    .catch(err => console.log(err))
   })
-  .catch(err => res.status(500).send(err))
+  .catch(err => console.log(err))
 }
 
 module.exports = {
