@@ -17,7 +17,7 @@
         <a href="/" class="item">Home</a>
         <a href="/komik.html" class="active item">Komik</a>
         <a class="item">Genre</a>
-        <div v-if="login">
+        <div v-if="isLogin">
           <a class="item" @click="modalAdd">
             <i class="add circle icon"></i>
             Tambah Komik
@@ -43,7 +43,7 @@
           <a href="/" class="item">Home</a>
           <a href="/komik.html" class="active item">Komik</a>
           <a class="item">Genre</a>
-          <div class="right menu" v-if="login">
+          <div class="right menu" v-if="isLogin">
             <div class="item">
               <div class="item">
                 <a class="ui button" @click="modalAdd">
@@ -70,7 +70,7 @@
         <a href="/" class="active item">Home</a>
         <a href="/komik.html" class="item">Komik</a>
         <a class="item">Genre</a>
-        <div v-if="login">
+        <div v-if="isLogin">
           <a class="item" @click="modalAdd">
             <i class="add circle icon"></i>
             Tambah Komik
@@ -117,7 +117,7 @@
             <div class="three wide column center aligned">
               <h4 class="ui inverted header">Account</h4>
               <div class="ui inverted link list">
-                <div v-if="login">
+                <div v-if="isLogin">
                   <a href="#" class="item">My Account</a><br>
                   <a href="#" class="item">Logout</a>
                 </div>

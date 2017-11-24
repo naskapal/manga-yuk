@@ -18,21 +18,15 @@ const uploadImages = (req, res, next) => {
   if (!req.files) {
     next()
   }
-  
-  console.log(`=============================================${req.files}`);
-  
+
   let fileNames = []
-  
+
   req.files.forEach(file => {
     fileNames.push(`${Date.now()}__${file.originalname}`)
   })
-  
-  // console.log(fileNames);
-  
-  // let fileName = `${Date.now()}__${req.file.originalname}`
-  
+
   let publicFileNames = []
-  
+
   fileNames.forEach((fileName, index) => {
     let file = bucket.file(fileName)
     stream = file.createWriteStream({
@@ -45,7 +39,7 @@ const uploadImages = (req, res, next) => {
       console.log("error di stream lho");
       next(err)
     })
-    
+
     stream.on('finish', () => {
       req.files[index].cloudStorageObject = fileName
       file.makePublic().then(success => {
