@@ -17,17 +17,17 @@
         <a href="/" class="active item">Home</a>
         <a href="/komik.html" class="item">Komik</a>
         <a class="item">Genre</a>
-        <div v-if="login">
+        <div v-if="isLogin">
           <a class="item" @click="modalAdd">
             <i class="add circle icon"></i>
             Tambah Komik
           </a>
           <a class="item">My Account</a>
-          <a class="item">Logout</a>
+          <a class="item" @click="logout">Logout</a>
         </div>
         <div v-else>
-          <a class="item">Log in</a>
-          <a class="item">Sign Up</a>
+          <a class="item" @click="loginModal">Log in</a>
+          <a class="item" @click="signupModal">Sign Up</a>
         </div>
       </div>
       <!--Page Contents-->
@@ -42,17 +42,17 @@
               <a href="/komik.html" class="item">Komik</a>
               <a class="item">Genre</a>
               <div class="right item">
-                <a class="ui inverted button" @click="modalAdd">
-                  <i class="add circle icon"></i>
-                  Tambah Komik
-                </a>
-                <div v-if="login">
+                <div v-if="isLogin">
+                  <a class="ui inverted button" @click="modalAdd">
+                    <i class="add circle icon"></i>
+                    Tambah Komik
+                  </a>
                   <a class="ui inverted button">My Account</a>
-                  <a class="ui inverted red button">Logout</a>
+                  <a class="ui inverted red button" @click="logout">Logout</a>
                 </div>
                 <div v-else>
-                  <a class="ui inverted button">Log in</a>
-                  <a class="ui inverted button">Sign Up</a>
+                  <a class="ui inverted button" @click="loginModal">Log in</a>
+                  <a class="ui inverted button" @click="signupModal">Sign Up</a>
                 </div>
               </div>
             </div>
@@ -97,13 +97,13 @@
             <div class="three wide column center aligned">
               <h4 class="ui inverted header">Account</h4>
               <div class="ui inverted link list">
-                <div v-if="login">
+                <div v-if="isLogin">
                   <a href="#" class="item">My Account</a><br>
-                  <a href="#" class="item">Logout</a>
+                  <a href="#" class="item" @click="logout">Logout</a>
                 </div>
                 <div v-else>
-                  <a href="#" class="item">Log in</a><br>
-                  <a href="#" class="item">Sign Up</a>
+                  <a href="#" class="item" @click="loginModal">Log in</a><br>
+                  <a href="#" class="item" @click="signupModal">Sign Up</a>
                 </div>
               </div>
             </div>
@@ -124,6 +124,87 @@
       </div>
 
       <!-- Modal -->
+      <div class="ui tiny modal login">
+        <i class="close icon"></i>
+        <div class="header">
+          Login
+        </div>
+        <div class="ui centered grid">
+          <div class="fourteen wide column">
+            <br>
+            <form class="ui form">
+              <div class="field">
+                <label>Username</label>
+                <input name="username" placeholder="Username" type="text" v-model="username">
+              </div>
+              <div class="field">
+                <label>Password</label>
+                <input name="password" placeholder="Password" type="password" v-model="password">
+              </div>
+            </form>
+            <br>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui black deny button">
+            Batal
+          </div>
+          <div class="ui positive right labeled icon button" @click="login">
+            Login
+            <i class="checkmark icon"></i>
+          </div>
+        </div>
+      </div>
+      <div class="ui tiny modal signup">
+        <i class="close icon"></i>
+        <div class="header">
+          Signup
+        </div>
+        <div class="ui centered grid">
+          <div class="fourteen wide column">
+            <br>
+            <form class="ui form">
+              <div class="field">
+                <label>Nama Depan</label>
+                <input name="first_name" placeholder="Nama Depan" type="text" v-model="first_name">
+              </div>
+              <div class="field">
+                <label>Nama Belakang</label>
+                <input name="username" placeholder="Nama Belakang" type="text" v-model="last_name">
+              </div>
+              <div class="field">
+                <label>Username</label>
+                <input name="username" placeholder="Username" type="text" v-model="username">
+              </div>
+              <div class="field">
+                <label>Password</label>
+                <input name="password" placeholder="Password" type="password" v-model="password">
+              </div>
+              <div class="field">
+                <label>Email</label>
+                <input name="email" placeholder="Email" type="email" v-model="email">
+              </div>
+              <div class="field">
+                <label>Gender</label>
+                <select name="gender" v-model="gender">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </form>
+            <br>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui black deny button">
+            Batal
+          </div>
+          <div class="ui positive right labeled icon button" @click="signup">
+            Signup
+            <i class="checkmark icon"></i>
+          </div>
+        </div>
+      </div>
       <div class="ui read basic longer modal">
         <div class="ui segment">
           <read-comic :comic="comicList"/>
