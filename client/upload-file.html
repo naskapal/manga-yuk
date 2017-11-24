@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Image Upload</title>
+</head>
+
+<body>
+  <div id="upload">
+    <div v-if="!image">
+      <h2>Select an image</h2>
+      <input type="file" @change="onFileChange" multiple>
+    </div>
+    <div v-else>
+      <img :src="image" />
+      <span><button @click="removeImage">Remove image</button></span>
+      <span><button @click="uploadImage" type="button" name="button">Upload</button></span>
+    </div>
+  </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="assets/js/uploadFile.js"></script>
+</body>
+
+</html>
