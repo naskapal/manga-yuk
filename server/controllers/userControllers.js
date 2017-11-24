@@ -1,9 +1,12 @@
-const User = require('../models/userModel')
+// require libraries
 const ObjectId = require('mongodb').ObjectId
-const bcrypt = require('bcryptjs')
+
+const User = require('../models/userModel')
 const passwordEncrypt = require('../helpers/passwordEncrypt')
 const passwordDecrypt = require('../helpers/passwordDecrypt')
+const generateToken = require('../helpers/token')
 
+// create user
 const create = (req, res) => {
   passwordEncrypt(req.body.password)
   .then(encryptedPass => {
@@ -25,12 +28,14 @@ const create = (req, res) => {
   .catch(err => res.status(500).send(err))
 }
 
+// get all users
 const getAll = (req, res) => {
   User.find()
   .then(users => res.send(users))
   .catch(err => res.status(500).send(err))
 }
 
+// get user by id
 const getById = (req, res) => {
   let id = {_id: ObjectId(req.params.id)}
 
@@ -39,13 +44,20 @@ const getById = (req, res) => {
   .catch(err => res.status(500).send(err))
 }
 
+// update user
 const update = (req, res) => {
   let id = {_id: ObjectId(req.params.id)}
 
   User.findById(id)
   .then(user => {
+    // console.log('--> masuk findById');
+    // console.log(user);
+    // res.send(user)
     passwordEncrypt(req.body.password)
     .then(encryptedPass => {
+      // console.log('--> masuk passwordEncrypt');
+      // console.log(encryptedPass);
+      // res.send(encryptedPass)
       user.first_name = req.body.first_name || user.first_name,
       user.last_name = req.body.last_name || user.last_name,
       user.username = req.body.username || user.username,
@@ -65,6 +77,7 @@ const update = (req, res) => {
   .catch(err => res.status(500).send(err))
 }
 
+// delete user
 const remove = (req, res) => {
   let id = {_id: ObjectId(req.params.id)}
 
@@ -73,12 +86,24 @@ const remove = (req, res) => {
   .catch(err => res.status(500).send(err))
 }
 
+// login user
 const login = (req, res) => {
   User.findOne({username: req.body.username})
   .then(user => {
     passwordDecrypt(req.body.password, user.password)
     .then(success => {
-      res.send(success)
+      if(success) {
+        generateToken(user)
+        .then(token => {
+          res.send({
+            token: token,
+            msg: 'Login success'
+          })
+        })
+        .catch(err => res.status(500).send(err))
+      } else {
+        res.send('Login failed! Incorrect username or password')
+      }
     })
     .catch(err => res.status(500).send(err))
   })
