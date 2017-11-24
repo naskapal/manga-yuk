@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta content="width=1300, initial-scale=1 user-scalable=yes" name="viewport">
@@ -30,6 +30,7 @@
           <a class="item">Sign Up</a>
         </div>
       </div>
+
       <!--Page Contents-->
       <div class="ui large top fixed menu transition visible" style="display: flex !important;">
         <div class="ui container">
@@ -49,31 +50,55 @@
                   <i class="add circle icon"></i>
                   Tambah Komik</a>
                 </div>
-              <a class="ui button">My Account</a>
+                <a class="ui button">My Account</a>
+              </div>
+              <div class="item">
+                <a class="ui red button">Logout</a>
+              </div>
             </div>
-            <div class="item">
-              <a class="ui red button">Logout</a>
-            </div>
-          </div>
-          <div class="right menu" v-else>
-            <div class="item">
-              <a class="ui button">Log in</a>
-            </div>
-            <div class="item">
-              <a class="ui primary button">Sign Up</a>
+            <div class="right menu" v-else>
+              <div class="item">
+                <a class="ui button">Log in</a>
+              </div>
+              <div class="item">
+                <a class="ui primary button">Sign Up</a>
+              </div>
             </div>
           </div>
         </div>
+      <div class="ui vertical inverted sidebar menu left">
+        <a href="/" class="active item">Home</a>
+        <a href="/komik.html" class="item">Komik</a>
+        <a class="item">Genre</a>
+        <div v-if="login">
+          <a class="item" @click="modalAdd">
+            <i class="add circle icon"></i>
+            Tambah Komik
+          </a>
+          <a class="item">My Account</a>
+          <a class="item">Logout</a>
+        </div>
+        <div v-else>
+          <a class="item">Log in</a>
+          <a class="item">Sign Up</a>
+        </div>
       </div>
+      <!--Page Contents-->
       <div class="pusher">
+        <div class="ui inverted vertical masthead center aligned segment">
         <div class="ui segment">
           <div class="ui container">
             <div class="ui header">
-              Komik
+              {{reading}}
             </div>
             <div class="ui inverted divider"></div>
             <div class="ui links four cards doubling">
-              <card-comic v-for="(l,i) in loop" :key="i"/>
+              <card-comic v-for="(comic,i) in comicList" :key="i" v-if="i < 8" :comic="comic"/>
+            </div>
+            <div class="ui segment">
+              <a href="/komik.html" class="ui primary button fluid large center floated">
+                Lihat lebih banyak
+              </a>
             </div>
           </div>
         </div>
@@ -119,6 +144,11 @@
       </div>
 
       <!-- Modal -->
+      <div class="ui read basic longer modal">
+        <div class="ui segment">
+          <read-comic :comic="comicList"/>
+        </div>
+      </div>
       <div class="ui tiny modal modal-add">
         <i class="close icon"></i>
         <div class="header">
@@ -175,6 +205,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
   <script src="/assets/script/vue/vue-card-comic.js"></script>
+  <script src="/assets/script/vue/vue-read-comic.js"></script>
   <script src="/assets/script/vue/vue-parent.js"></script>
   <script src="/assets/script/script.js"></script>
 </html>

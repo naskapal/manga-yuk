@@ -3,7 +3,7 @@ new Vue({
   data: {
     message: 'Hello Vue!',
     login: '',
-    loop: [1,1,1,1,1,1,1,1,1,1,1,1,1,],
+    reading: 'Komik',
     comicList: []
   },
   methods: {
@@ -12,15 +12,17 @@ new Vue({
        $('.tiny.modal.modal-add')
         .modal('show')
       ;
-     }
+    }
   },
   created: function () {
-    axios.get('https://localhost:3000/comic')
+    axios.get('http://localhost:3004/comic')
     .then(response => {
-      this.comicList = response
+      this.comicList = response.data
+      console.log(response.data);
     })
     .catch(err => {
       console.log(err);
     })
+    console.log(this.reading);
   }
 })
