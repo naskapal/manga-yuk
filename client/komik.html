@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta content="width=1300, initial-scale=1 user-scalable=yes" name="viewport">
@@ -13,6 +13,59 @@
   <body class="template pushable">
     <div id="app">
       <!--Sidebar Menu-->
+      <div class="ui vertical inverted sidebar menu left">
+        <a href="/" class="item">Home</a>
+        <a href="/komik.html" class="active item">Komik</a>
+        <a class="item">Genre</a>
+        <div v-if="login">
+          <a class="item" @click="modalAdd">
+            <i class="add circle icon"></i>
+            Tambah Komik
+          </a>
+          <a class="item">My Account</a>
+          <a class="item">Logout</a>
+        </div>
+        <div v-else>
+          <a class="item">Log in</a>
+          <a class="item">Sign Up</a>
+        </div>
+      </div>
+
+      <!--Page Contents-->
+      <div class="ui large top fixed menu transition visible" style="display: flex !important;">
+        <div class="ui container">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+          <a class="title right item">
+            MANGA KUY!
+          </a>
+          <a href="/" class="item">Home</a>
+          <a href="/komik.html" class="active item">Komik</a>
+          <a class="item">Genre</a>
+          <div class="right menu" v-if="login">
+            <div class="item">
+              <div class="item">
+                <a class="ui button" @click="modalAdd">
+                  <i class="add circle icon"></i>
+                  Tambah Komik</a>
+                </div>
+                <a class="ui button">My Account</a>
+              </div>
+              <div class="item">
+                <a class="ui red button">Logout</a>
+              </div>
+            </div>
+            <div class="right menu" v-else>
+              <div class="item">
+                <a class="ui button">Log in</a>
+              </div>
+              <div class="item">
+                <a class="ui primary button">Sign Up</a>
+              </div>
+            </div>
+          </div>
+        </div>
       <div class="ui vertical inverted sidebar menu left">
         <a href="/" class="active item">Home</a>
         <a href="/komik.html" class="item">Komik</a>
@@ -32,40 +85,7 @@
       </div>
       <!--Page Contents-->
       <div class="pusher">
-        <div class="ui inverted vertical masthead center aligned segment bg-image">
-          <div class="ui container">
-            <div class="ui large secondary inverted pointing menu">
-              <a class="toc item">
-                <i class="sidebar icon"></i>
-              </a>
-              <a href="/" class="active item">Home</a>
-              <a href="/komik.html" class="item">Komik</a>
-              <a class="item">Genre</a>
-              <div class="right item">
-                <a class="ui inverted button" @click="modalAdd">
-                  <i class="add circle icon"></i>
-                  Tambah Komik
-                </a>
-                <div v-if="login">
-                  <a class="ui inverted button">My Account</a>
-                  <a class="ui inverted red button">Logout</a>
-                </div>
-                <div v-else>
-                  <a class="ui inverted button">Log in</a>
-                  <a class="ui inverted button">Sign Up</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="ui text container">
-            <h1 class="ui inverted header">
-              Manga Yuk
-            </h1>
-            <h2>
-              Read, Share and Download Komik.
-            </h2>
-          </div>
-        </div>
+        <div class="ui inverted vertical masthead center aligned segment">
         <div class="ui segment">
           <div class="ui container">
             <div class="ui header">
