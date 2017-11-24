@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const User = require('../controllers/userController');
 const Image = require('../helpers/image');
+const user = require('../controllers/userControllers')
+const checkAuth = require('../middleware/checkAuth')
 
 router.post('/upload',
 Image.multer.array('image'),
@@ -13,10 +15,6 @@ Image.uploadImages,
     link: req.headers.publicFileNames
   })
 })
-
-module.exports = router;
-const user = require('../controllers/userControllers')
-const checkAuth = require('../middleware/checkAuth')
 
 router.post('/', user.create)
 router.post('/login', user.login)
