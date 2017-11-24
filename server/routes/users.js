@@ -3,12 +3,13 @@ const User = require('../controllers/userController');
 const Image = require('../helpers/image');
 const user = require('../controllers/userControllers')
 const checkAuth = require('../middleware/checkAuth')
+const Manga = require('../controllers/mangaControllers')
 
 router.post('/upload',
 Image.multer.array('image'),
 Image.uploadImages,
+Manga.create,
 (req, res) => {
-  console.log(req.headers);
   res.send({
     status: 200,
     msg: "success",

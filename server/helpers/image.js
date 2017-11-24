@@ -18,6 +18,8 @@ const uploadImages = (req, res, next) => {
   if (!req.files) {
     next()
   }
+  
+  console.log("sekarang masuk uploadImages");
 
   let fileNames = []
 
@@ -43,15 +45,15 @@ const uploadImages = (req, res, next) => {
     stream.on('finish', () => {
       req.files[index].cloudStorageObject = fileName
       file.makePublic().then(success => {
-          publicFileNames.push(getLink(fileName))
-          if (publicFileNames.length == fileNames.length) {
-            req.headers.publicFileNames = publicFileNames
-            next()
-          }
-        })
-        .catch(err => {
-          console.error(err);
-        })
+        publicFileNames.push(getLink(fileName))
+        if (fileNames.length === publicFileNames.length) {
+          req.headers.publicFileNames = publicFileNames
+          next()
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      })
     })
     stream.end(req.files[index].buffer)
   })
@@ -60,7 +62,7 @@ const uploadImages = (req, res, next) => {
 const multer = Multer({
   storage: Multer.MemoryStorage,
   limits: {
-    fileSize: 5 * 1024 * 1024
+    fileSize: 10 * 1024 * 1024
   }
 })
 

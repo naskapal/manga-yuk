@@ -9,26 +9,23 @@ const mangaSchema = new Schema({
   },
   title: {
     type: String,
-    required: true,
+    // required: true,
     unique: true
   },
   author: {
     type: String,
-    required: true,
+    // required: true,
     match: /[a-z]/
   },
   genre: {
     type: String,
-    required: true
+    // required: true
   },
   summary: {
     type: String,
     default: null
   },
-  img: [{
-    type: String,
-    default: []
-  }],
+  img: [],
   createdAt: {
     type: Date,
     default: Date.now
