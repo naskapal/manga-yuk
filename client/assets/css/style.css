@@ -55,7 +55,9 @@
   padding: 5em 0em;
 }
 
-.secondary.pointing.menu .toc.item {
+.secondary.pointing.menu .toc.item,
+.top.fixed.menu .toc.item,
+.top.fixed.menu .title.item {
   display: none;
 }
 
@@ -63,11 +65,16 @@
   .ui.fixed.menu {
     display: none !important;
   }
+  .top.fixed.menu .item,
+  .top.fixed.menu .item.right,
+  .top.fixed.menu .menu,
   .secondary.pointing.menu .item,
   .secondary.pointing.menu .item.right,
   .secondary.pointing.menu .menu {
     display: none;
   }
+  .top.fixed.menu .toc.item,
+  .top.fixed.menu .title.item,
   .secondary.pointing.menu .toc.item {
     display: block;
   }
@@ -88,6 +95,8 @@
   display: none;
 }
 
-.bgimg {
-  background-image: url("https://www.komikgue.com/uploads/manga/kingdom/chapters/539/03.jpg") #333 !important;
+.bg-image {
+    background-image: url('../img/slide/slide1.jpg') !important;
+    background-size: cover !important;
+    background-position: fixed !important;
 }

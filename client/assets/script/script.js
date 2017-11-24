@@ -34,3 +34,5 @@ $('input:file', '.ui.action.input')
   }
   $('input:text', $(e.target).parent()).val(name);
 });
+
+console.log(this.$route.query.test)

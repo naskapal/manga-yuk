@@ -1,25 +1,22 @@
 Vue.component('card-comic', {
   template: `
-    <div class="card">
+    <a class="card">
       <div class="image">
-        <img src="/images/avatar2/large/kristy.png">
+        <img src="/assets/img/poster/sample.jpg">
       </div>
       <div class="content">
         <a class="header">Komik</a>
-        <div class="meta">
-          <span class="date">Joined in 2013</span>
-        </div>
         <div class="description">
           Komik is an art director living in New York.
         </div>
       </div>
       <div class="extra content">
-        <a>
-          <i class="user icon"></i>
-          22 Friends
-        </a>
+        <div class="ui buttons fluid">
+          <button class="ui primary button">Baca Komik</button>
+          <button class="ui secondary button">Download</button>
+        </div>
       </div>
-    </div>
+    </a>
   `,
   data: function() {
     return {
