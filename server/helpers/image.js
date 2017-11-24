@@ -19,6 +19,8 @@ const uploadImages = (req, res, next) => {
     next()
   }
   
+  console.log(`=============================================${req.files}`);
+  
   let fileNames = []
   
   req.files.forEach(file => {
@@ -48,7 +50,7 @@ const uploadImages = (req, res, next) => {
       req.files[index].cloudStorageObject = fileName
       file.makePublic().then(success => {
         publicFileNames.push(getLink(fileName))
-        if (index == fileNames.length-1) {
+        if (fileNames.length === publicFileNames.length) {
           req.headers.publicFileNames = publicFileNames
           next()
         }
@@ -64,7 +66,7 @@ const uploadImages = (req, res, next) => {
 const multer = Multer({
   storage: Multer.MemoryStorage,
   limits: {
-    fileSize: 5 * 1024 * 1024
+    fileSize: 10 * 1024 * 1024
   }
 })
 

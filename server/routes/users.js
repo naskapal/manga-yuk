@@ -8,7 +8,6 @@ router.post('/upload',
 Image.multer.array('image'),
 Image.uploadImages,
 (req, res) => {
-  console.log(req.headers);
   res.send({
     status: 200,
     msg: "success",
