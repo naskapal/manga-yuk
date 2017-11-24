@@ -4,18 +4,23 @@ const ObjectId = require('mongodb').ObjectId
 const Manga = require('../models/mangaModel')
 
 const create = (req, res) => {
-  let manga = new Manga({
-    uploader: ObjectId('5a1757f743a4a905844118c1'),
-    title: req.body.title,
-    author: req.body.author,
-    genre: req.body.genre,
-    summary: req.body.summary,
-    // img: []
-  })
+  console.log(req.verifyUser);
+  // Manga.find({title: req.verifyUser._id})
+  // .then(response => {
+    let manga = new Manga({
+      uploader: ObjectId('5a1757f743a4a905844118c1'),
+      title: req.body.title,
+      author: req.body.author,
+      genre: req.body.genre,
+      summary: req.body.summary,
+      // img: []
+    })
 
-  manga.save()
-  .then(result => res.send(result))
-  .catch(err => res.status(500).send(err))
+    // manga.save()
+    // .then(result => res.send(result))
+    // .catch(err => res.status(500).send(err))
+
+  // })
 }
 
 const getAll = (req, res) => {
