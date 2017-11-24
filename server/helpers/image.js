@@ -18,6 +18,8 @@ const uploadImages = (req, res, next) => {
   if (!req.files) {
     next()
   }
+  
+  console.log("sekarang masuk uploadImages");
 
   let fileNames = []
 

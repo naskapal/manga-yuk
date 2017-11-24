@@ -10,7 +10,11 @@ new Vue({
     last_name: '',
     email: '',
     gender: '',
-    uploadQueue: []
+    uploadQueue: [],
+    title : '',
+    summary: '',
+    genre: '',
+    author: '',
   },
   methods: {
      modalAdd: function() {
@@ -102,7 +106,12 @@ new Vue({
 
 
       var formData = new FormData()
-
+      
+      formData.append('title', this.title)
+      formData.append('summary', this.summary)
+      formData.append('genre', this.genre)
+      formData.append('author', this.author)
+      
       this.uploadQueue.forEach(data => {
         formData.append('image', data)
       })

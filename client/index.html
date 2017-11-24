@@ -219,19 +219,19 @@
           <form class="ui form fluid">
             <div class="field">
               <label>Judul Komik</label>
-              <input name="title" placeholder="Judul Komik" type="text">
+              <input name="title" placeholder="Judul Komik" type="text" v-model="title">
             </div>
             <div class="field">
               <label>Deskripsi</label>
-              <textarea name="sumary" placeholder="Deskripsi..." rows="2"></textarea>
+              <textarea name="summary" placeholder="Deskripsi..." rows="2"  v-model="summary">></textarea>
             </div>
             <div class="field">
               <label>Genre</label>
-              <textarea name="genre" placeholder="Genre" rows="2"></textarea>
+              <textarea name="genre" placeholder="Genre" rows="2"  v-model="genre">></textarea>
             </div>
             <div class="field">
               <label>Author</label>
-              <textarea name="author" placeholder="Author" rows="2"></textarea>
+              <textarea name="author" placeholder="Author" rows="2"  v-model="author">></textarea>
             </div>
             <div class="field">
               <label>Pilih Gambar</label>
