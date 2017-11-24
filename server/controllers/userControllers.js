@@ -50,23 +50,31 @@ const update = (req, res) => {
 
   User.findById(id)
   .then(user => {
-    // console.log('--> masuk findById');
-    // console.log(user);
-    // res.send(user)
+    user.first_name = req.body.first_name || user.first_name,
+    user.last_name = req.body.last_name || user.last_name,
+    user.username = req.body.username || user.username,
+    user.email = req.body.email || user.email,
+    user.gender = req.body.gender || user.gender,
+    user.photo_profile = req.body.photo_profile || user.photo_profile,
+    user.isAdmin = req.body.isAdmin || user.isAdmin
+    user.updatedAt = new Date()
+
+    user.save()
+    .then(result => res.send(result))
+    .catch(err => res.status(500).send(err))
+  })
+  .catch(err => res.status(500).send(err))
+}
+
+// change password
+const changePassword = (req, res) => {
+  let id = {_id: ObjectId(req.params.id)}
+
+  User.findById(id)
+  .then(user => {
     passwordEncrypt(req.body.password)
     .then(encryptedPass => {
-      // console.log('--> masuk passwordEncrypt');
-      // console.log(encryptedPass);
-      // res.send(encryptedPass)
-      user.first_name = req.body.first_name || user.first_name,
-      user.last_name = req.body.last_name || user.last_name,
-      user.username = req.body.username || user.username,
-      user.password = encryptedPass || user.password,
-      user.email = req.body.email || user.email,
-      user.gender = req.body.gender || user.gender,
-      user.photo_profile = req.body.photo_profile || user.photo_profile,
-      user.isAdmin = req.body.isAdmin || user.isAdmin
-      user.updatedAt = new Date()
+      user.password = encryptedPass || user.password
 
       user.save()
       .then(result => res.send(result))
@@ -115,6 +123,7 @@ module.exports = {
   getAll,
   getById,
   update,
+  changePassword,
   remove,
   login
 }

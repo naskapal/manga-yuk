@@ -12,6 +12,7 @@ mongoose.connect(`mongodb://zuhri:${process.env.MONGO_PASSWORD}@cluster0-shard-0
 
 const index = require('./routes/index');
 const users = require('./routes/users');
+const manga = require('./routes/manga');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/manga', manga);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
