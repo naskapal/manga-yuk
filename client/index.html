@@ -223,31 +223,23 @@
             </div>
             <div class="field">
               <label>Deskripsi</label>
-              <textarea name="description" placeholder="Deskripsi..." rows="2"></textarea>
-            </div>
-            <div class="two fields">
-              <div class="field">
-                <label>Poster Komik</label>
-                <div class="ui action input">
-                  <input type="text" placeholder="Pilih Poster Komik" readonly>
-                  <input type="file" name="poster">
-                  <div class="ui icon button">
-                    <i class="attach icon"></i>
-                  </div>
-                </div>
-              </div>
-              <div class="field">
-                <label>Gambar Komik</label>
-                <div class="ui action input">
-                  <input type="text" placeholder="Pilih Gambar Komik" readonly>
-                  <input type="file" name="comic-pictures" multiple>
-                  <div class="ui icon button">
-                    <i class="attach icon"></i>
-                  </div>
-                </div>
-              </div>
+              <textarea name="sumary" placeholder="Deskripsi..." rows="2"></textarea>
             </div>
             <div class="field">
+              <label>Genre</label>
+              <textarea name="genre" placeholder="Genre" rows="2"></textarea>
+            </div>
+            <div class="field">
+              <label>Author</label>
+              <textarea name="author" placeholder="Author" rows="2"></textarea>
+            </div>
+            <div class="field">
+              <label>Pilih Gambar</label>
+              <div id="upload">
+                <div v-if="!image">
+                  <input type="file" @change="onFileChange" multiple>
+                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -255,7 +247,7 @@
           <div class="ui black deny button">
             Batal
           </div>
-          <div class="ui positive right labeled icon button">
+          <div class="ui positive right labeled icon button" @click="uploadImage">
             Simpan
             <i class="checkmark icon"></i>
           </div>
