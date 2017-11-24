@@ -21,6 +21,10 @@ const mangaSchema = new Schema({
     type: String,
     required: true
   },
+  summary: {
+    type: String,
+    default: null
+  },
   img: [{
     type: String,
     default: []
