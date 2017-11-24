@@ -10,7 +10,8 @@ new Vue({
     last_name: '',
     email: '',
     gender: '',
-    uploadQueue: []
+    uploadQueue: [],
+    image: ''
   },
   methods: {
      modalAdd: function() {
@@ -116,7 +117,7 @@ new Vue({
       .catch(error => {
         console.error(error);
       })
-    }
+    },
   },
   created: function () {
     axios.get('http://localhost:3333/manga')
